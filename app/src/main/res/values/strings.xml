@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">Weight-control</string>
+    <string name="app_name">Weight-Control</string>
+    <string name="profile_tittle">Profile</string>
+    <string name="profile_name">Name:</string>
+    <string name="profile_weight">Weight:</string>
+    <string name="profile_height">Height:</string>
+    <string name="profile_goal">Goal:</string>
+    <string name="enter_your_name">Enter your name</string>
+    <string name="enter_your_current_weight">Enter your current weight</string>
+    <string name="enter_your_height">Enter your height</string>
+    <string name="enter_your_desired_weight">Enter your desired weight</string>
+    <string name="btn_save_profile">Save</string>
 </resources>
