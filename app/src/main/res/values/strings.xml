@@ -5,9 +5,14 @@
     <string name="profile_weight">Weight:</string>
     <string name="profile_height">Height:</string>
     <string name="profile_goal">Goal:</string>
-    <string name="enter_your_name">Enter your name</string>
-    <string name="enter_your_current_weight">Enter your current weight</string>
-    <string name="enter_your_height">Enter your height</string>
-    <string name="enter_your_desired_weight">Enter your desired weight</string>
+    <string name="enter_your_name">Name</string>
+    <string name="enter_your_current_weight">Current weight in kg</string>
+    <string name="enter_your_height">Height in cm</string>
+    <string name="enter_your_desired_weight">Desired weight in kg</string>
     <string name="btn_save_profile">Save</string>
+    <string name="validateWeight">The weight value must be between 20 and 1000kg</string>
+    <string name="validateTextGoal">The weight goal value must be between 20 and 1000kg</string>
+    <string name="validateHeight">The height value must be between 20 and 300cm</string>
+    <string name="completeFields">Please complete all fields</string>
+    <string name="profileUpdated">Profile successfully updated!</string>
 </resources>
