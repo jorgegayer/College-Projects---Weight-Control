@@ -11,7 +11,7 @@
     <string name="enter_your_desired_weight">Desired weight in kg</string>
     <string name="btn_save_profile">Save</string>
     <string name="validateWeight">The weight value must be between 20 and 1000kg</string>
-    <string name="validateTextGoal">The weight goal value must be between 20 and 1000kg</string>
+    <string name="validateGoal">The weight goal value must be between 20 and 1000kg</string>
     <string name="validateHeight">The height value must be between 20 and 300cm</string>
     <string name="completeFields">Please complete all fields</string>
     <string name="profileUpdated">Profile successfully updated!</string>

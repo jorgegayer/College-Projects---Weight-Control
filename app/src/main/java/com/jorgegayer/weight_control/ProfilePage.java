@@ -8,7 +8,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class ProfilePage extends AppCompatActivity {
-
     private EditText editTextName;
     private EditText editTextWeight;
     private EditText editTextHeight;
@@ -26,7 +25,7 @@ public class ProfilePage extends AppCompatActivity {
         editTextGoal = findViewById(R.id.editTextGoal);
         saveProfile = findViewById(R.id.btnSaveProfile);
 
-        if (savedInstanceState !=null) {
+        if (savedInstanceState != null) {
             editTextName.setText(savedInstanceState.getString("editTextName"));
             editTextWeight.setText(savedInstanceState.getString("editTextWeight"));
             editTextHeight.setText(savedInstanceState.getString("editTextHeight"));
@@ -39,21 +38,23 @@ public class ProfilePage extends AppCompatActivity {
             Toast.makeText(this, R.string.completeFields, Toast.LENGTH_LONG).show();
             return false;
         }
-        if ( Float.parseFloat(editTextWeight.getText().toString()) < 20 || Float.parseFloat(editTextWeight.getText().toString()) >1000) {
+        if ( Float.parseFloat(editTextWeight.getText().toString()) < 20 || Float.parseFloat(editTextWeight.getText().toString()) > 1000) {
             Toast.makeText(this, R.string.validateWeight, Toast.LENGTH_LONG).show();
             return false;
         }
 
-        if ( Float.parseFloat(editTextGoal.getText().toString()) < 20 || Float.parseFloat(editTextGoal.getText().toString()) >1000) {
-            Toast.makeText(this, R.string.validateTextGoal, Toast.LENGTH_LONG).show();
+        if ( Float.parseFloat(editTextGoal.getText().toString()) < 20 || Float.parseFloat(editTextGoal.getText().toString()) > 1000) {
+            Toast.makeText(this, R.string.validateGoal, Toast.LENGTH_LONG).show();
             return false;
         }
-        if ( Float.parseFloat(editTextHeight.getText().toString()) <= 20 || Float.parseFloat(editTextHeight.getText().toString()) >300) {
+        if ( Float.parseFloat(editTextHeight.getText().toString()) < 20 || Float.parseFloat(editTextHeight.getText().toString()) > 300) {
             Toast.makeText(this, R.string.validateHeight, Toast.LENGTH_LONG).show();
             return false;
         }
+
         return true;
     }
+
     public void saveProfile(View view) {
             String name;
             float weight;
@@ -65,11 +66,14 @@ public class ProfilePage extends AppCompatActivity {
                 weight = Float.parseFloat(editTextWeight.getText().toString());
                 height = Float.parseFloat(editTextHeight.getText().toString());
                 goal = Float.parseFloat(editTextGoal.getText().toString());
-                //Save the information into the database
+                // Save the information into the database
+                // ...
                 Toast.makeText(this, R.string.profileUpdated, Toast.LENGTH_LONG).show();
+                // Return to Home Page
                 finish();
             }
         }
+
         @Override
         public void onSaveInstanceState(Bundle outState) {
             super.onSaveInstanceState(outState);
@@ -78,8 +82,4 @@ public class ProfilePage extends AppCompatActivity {
             outState.putString("editTextWeight", editTextWeight.getText().toString());
             outState.putString("editTextGoal", editTextGoal.getText().toString());
         }
-
-
     }
-
-

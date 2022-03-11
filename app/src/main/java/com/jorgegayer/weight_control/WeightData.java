@@ -5,5 +5,4 @@ public class WeightData {
     private String date;
     private float weight;
     private float bmi;
-
 }

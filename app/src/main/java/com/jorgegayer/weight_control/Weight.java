@@ -8,17 +8,21 @@ public class Weight {
     public Weight() {
 
     }
+
     ArrayList<WeightData> getAll() {
         ArrayList<WeightData> localHistory = new ArrayList<WeightData>();
         return localHistory;
     }
+
     WeightData get(String date) {
         WeightData myData = new WeightData();
         return myData;
     }
+
     void set(WeightData myData) {
 
     }
+
     void delete(String date) {
 
     }
@@ -27,9 +31,9 @@ public class Weight {
         float localBMI = 0;
         return localBMI;
     }
+
     private float caculateToGo () {
         float localToGo = 0;
         return localToGo;
     }
-
 }
