@@ -20,16 +20,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(MainActivity.this, ProfilePage.class));
     }
 
-    // Here now just to have part of the implementation done
-    public void showDate(View view) {
-        DialogFragment newFragment = new DatePickerFragment();
-        newFragment.show(getSupportFragmentManager(), "DatePicker");
-    }
 
-    // Here now just to have part of the implementation done
-    public void processDatePickerResult(int year, int month, int day) {
-        String msg = Integer.toString(day) + "/" + Integer.toString(month) + "/" +
-                Integer.toString(year) + ".";
-        Toast.makeText(this, "Date: " + msg, Toast.LENGTH_SHORT).show();
+    public void addWeight(View view) {
+        startActivity(new Intent(MainActivity.this, AddWeight.class));
     }
 }
