@@ -1,10 +1,10 @@
 package com.jorgegayer.weight_control;
 
 public class ProfileData {
-    private int userID;
-    private String email;
-    private String name;
-    private float weight;
-    private float height;
-    private float weightGoal;
+    public int userID;
+    public String email;
+    public String name;
+    public float weight;
+    public float height;
+    public float weightGoal;
 }
