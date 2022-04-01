@@ -96,7 +96,7 @@ public class ProfilePage extends AppCompatActivity {
                 db = MainActivity.context.openOrCreateDatabase("WeightControl", MainActivity.context.MODE_PRIVATE, null);
                 db.execSQL("CREATE TABLE IF NOT EXISTS Profile(name VARCHAR, weight DOUBLE, height DOUBLE, togo DOUBLE)");
                 String sql;
-                if (userProfile.name == "") {
+                if (MainActivity.profile.name == null) {
                      sql = "INSERT INTO Profile (name, weight, height, togo) VALUES ('" + userProfile.name + "'," + userProfile.weight + "," + userProfile.height + "," + userProfile.weightGoal + " )";
                 } else {
                      sql = "UPDATE Profile set name='" + userProfile.name + "', weight=" +userProfile.weight + ", height=" +userProfile.height + ", togo=" +userProfile.weightGoal +  "";
