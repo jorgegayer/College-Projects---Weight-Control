@@ -17,16 +17,22 @@ import java.util.Date;
 
 public class AddWeight extends AppCompatActivity {
     private EditText txtWeight;
+    private TextView txtGoal;
+    private TextView txtToGo;
     private TextView lblDate;
+    public ProfileData userProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_weight);
 
-
+        userProfile = MainActivity.profile;
         txtWeight = findViewById(R.id.txtWeight);
         lblDate = findViewById(R.id.lblDate);
+        txtGoal = findViewById(R.id.txtGoal);
+        txtToGo = findViewById(R.id.txtToGo);
+
 
 
 
@@ -34,6 +40,8 @@ public class AddWeight extends AppCompatActivity {
         if (savedInstanceState != null) {
             txtWeight.setText(savedInstanceState.getString("txtWeight"));
             lblDate.setText(savedInstanceState.getString("lblDate"));
+            txtGoal.setText(savedInstanceState.getString("txtGoal"));
+            txtToGo.setText(savedInstanceState.getString("txtToGo"));
         }
 
     }
@@ -42,9 +50,11 @@ public class AddWeight extends AppCompatActivity {
         Calendar cal = Calendar.getInstance();
         Date todaysdate = cal.getTime();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-
-
+        Bundle extras = getIntent().getExtras();
         lblDate.setText(dateFormat.format(todaysdate));
+        txtWeight.setText(Double.toString(userProfile.weight));
+        txtGoal.setText(Double.toString(userProfile.weightGoal));
+        txtToGo.setText(Double.toString(userProfile.togo));
     }
 
     // Here now just to have part of the implementation done
@@ -105,6 +115,8 @@ public class AddWeight extends AppCompatActivity {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString("txtWeight", txtWeight.getText().toString());
+        outState.putString("txtGoal", txtGoal.getText().toString());
+        outState.putString("txtToGo", txtToGo.getText().toString());
         outState.putString("lblDate", lblDate.getText().toString());
     }
 

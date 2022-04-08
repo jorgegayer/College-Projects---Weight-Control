@@ -85,6 +85,7 @@ public class ProfilePage extends AppCompatActivity {
                 profileData.weight = weight;
                 profileData.height = height;
                 profileData.weightGoal = goal;
+                profileData.togo = goal-weight;
 
                 // Save the information into the database
                 userProfile = new Profile();

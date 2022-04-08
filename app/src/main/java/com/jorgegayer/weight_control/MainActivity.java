@@ -44,6 +44,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addWeight(View view) {
-        startActivity(new Intent(MainActivity.this, AddWeight.class));
+        Intent intent = new Intent(MainActivity.this, AddWeight.class);
+        intent.putExtra("goal", profile.weightGoal);
+        intent.putExtra("weight", profile.weightGoal);
+        intent.putExtra("togo", profile.togo);
+        startActivity(intent);
     }
 }

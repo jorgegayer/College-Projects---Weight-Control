@@ -5,6 +5,7 @@ public class ProfileData {
     public String email;
     public String name;
     public float weight;
+    public float togo;
     public float height;
     public float weightGoal;
 }

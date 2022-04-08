@@ -11,7 +11,6 @@ public class Profile {
         profileInfo = new ProfileData();
         db = MainActivity.db;
     }
-
     boolean checkProfile() {
         return false;
     }
@@ -24,7 +23,7 @@ public class Profile {
             int nameIndex = query.getColumnIndex("name");
             int weightIndex = query.getColumnIndex("weight");
             int heightIndex = query.getColumnIndex("height");
-            int togoIndex = query.getColumnIndex("togo");
+            int goalIndex = query.getColumnIndex("goal");
 
             query.moveToFirst();
             if (query == null) return null;
@@ -32,7 +31,8 @@ public class Profile {
             userProfile.name = query.getString(nameIndex);
             userProfile.weight = Float.parseFloat(query.getString(weightIndex).toString());
             userProfile.height = Float.parseFloat(query.getString(heightIndex).toString());
-            userProfile.weightGoal = Float.parseFloat(query.getString(togoIndex).toString());
+            userProfile.weightGoal = Float.parseFloat(query.getString(goalIndex).toString());
+            userProfile.togo = userProfile.weightGoal - userProfile.weight;
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -42,11 +42,10 @@ public class Profile {
 
     public boolean set(ProfileData userProfile) {
         try {
-
-            db.execSQL("CREATE TABLE IF NOT EXISTS Profile(name VARCHAR, weight DOUBLE, height DOUBLE, togo DOUBLE)");
+            db.execSQL("CREATE TABLE IF NOT EXISTS Profile(name VARCHAR, weight DOUBLE, height DOUBLE, goal DOUBLE)");
             db.execSQL("delete from Profile");
             String sql;
-            sql = "INSERT INTO Profile (name, weight, height, togo) VALUES ('" + userProfile.name + "'," + userProfile.weight + "," + userProfile.height + "," + userProfile.weightGoal + " )";
+            sql = "INSERT INTO Profile (name, weight, height, goal) VALUES ('" + userProfile.name + "'," + userProfile.weight + "," + userProfile.height + "," + userProfile.weightGoal + " )";
             db.execSQL(sql);
             return true;
         } catch (Exception e) {
