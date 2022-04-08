@@ -16,7 +16,8 @@ public class ProfilePage extends AppCompatActivity {
     private EditText editTextGoal;
     private Button saveProfile;
     private SQLiteDatabase db;
-    ProfileData userProfile;
+    Profile userProfile;
+    ProfileData userData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +36,11 @@ public class ProfilePage extends AppCompatActivity {
             editTextHeight.setText(savedInstanceState.getString("editTextHeight"));
             editTextGoal.setText(savedInstanceState.getString("editTextGoal"));
         } else {
-            editTextName.setText(MainActivity.profile.name);
-            editTextWeight.setText(Float.toString(MainActivity.profile.weight));
-            editTextHeight.setText(Float.toString(MainActivity.profile.height));
-            editTextGoal.setText(Float.toString(MainActivity.profile.weightGoal));
+            userData= MainActivity.profile;
+            editTextName.setText(userData.name);
+            editTextWeight.setText(Float.toString(userData.weight));
+            editTextHeight.setText(Float.toString(userData.height));
+            editTextGoal.setText(Float.toString(userData.weightGoal));
         }
     }
 
@@ -71,43 +73,26 @@ public class ProfilePage extends AppCompatActivity {
             float goal;
 
             if (validateFields()) {
-                userProfile = new ProfileData();
+                ProfileData profileData = new ProfileData();
                 name = editTextName.getText().toString();
                 weight = Float.parseFloat(editTextWeight.getText().toString());
                 height = Float.parseFloat(editTextHeight.getText().toString());
                 goal = Float.parseFloat(editTextGoal.getText().toString());
 
-                userProfile.name = name;
-                userProfile.weight = weight;
-                userProfile.height = height;
-                userProfile.weightGoal = goal;
+                profileData.name = name;
+                profileData.weight = weight;
+                profileData.height = height;
+                profileData.weightGoal = goal;
 
                 // Save the information into the database
-                boolean savedProfile = saveProfile(userProfile);
+                boolean savedProfile = userProfile.set(userData);
                 Toast.makeText(this, R.string.profileUpdated, Toast.LENGTH_LONG).show();
                 // Return to Home Page
                 finish();
             }
         }
 
-        private boolean saveProfile(ProfileData userProfile) {
-            try {
-                db = MainActivity.db;
-                db = MainActivity.context.openOrCreateDatabase("WeightControl", MainActivity.context.MODE_PRIVATE, null);
-                db.execSQL("CREATE TABLE IF NOT EXISTS Profile(name VARCHAR, weight DOUBLE, height DOUBLE, togo DOUBLE)");
-                String sql;
-                if (MainActivity.profile.name == null) {
-                     sql = "INSERT INTO Profile (name, weight, height, togo) VALUES ('" + userProfile.name + "'," + userProfile.weight + "," + userProfile.height + "," + userProfile.weightGoal + " )";
-                } else {
-                     sql = "UPDATE Profile set name='" + userProfile.name + "', weight=" +userProfile.weight + ", height=" +userProfile.height + ", togo=" +userProfile.weightGoal +  "";
-                }
-                db.execSQL(sql);
-            return true;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return false;
-        }
+
 
         @Override
         public void onSaveInstanceState(Bundle outState) {

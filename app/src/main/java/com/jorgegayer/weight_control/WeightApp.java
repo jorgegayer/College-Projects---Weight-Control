@@ -9,7 +9,7 @@ public class WeightApp {
     }
 
     ProfileData get(String email) {
-        return myProfile.get(email);
+        return myProfile.get();
     }
 
     boolean checkProfile() {
