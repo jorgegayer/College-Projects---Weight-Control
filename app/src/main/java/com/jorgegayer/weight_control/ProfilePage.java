@@ -23,7 +23,7 @@ public class ProfilePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_page);
-
+        userProfile = new Profile();
         editTextName = findViewById(R.id.editTextName);
         editTextWeight = findViewById(R.id.editTextWeight);
         editTextHeight = findViewById(R.id.editTextHeight);
@@ -36,11 +36,13 @@ public class ProfilePage extends AppCompatActivity {
             editTextHeight.setText(savedInstanceState.getString("editTextHeight"));
             editTextGoal.setText(savedInstanceState.getString("editTextGoal"));
         } else {
-            userData= MainActivity.profile;
-            editTextName.setText(userData.name);
-            editTextWeight.setText(Float.toString(userData.weight));
-            editTextHeight.setText(Float.toString(userData.height));
-            editTextGoal.setText(Float.toString(userData.weightGoal));
+            userData= userProfile.get();
+            if (userData.name!=null) {
+                editTextName.setText(userData.name);
+                editTextWeight.setText(Float.toString(userData.weight));
+                editTextHeight.setText(Float.toString(userData.height));
+                editTextGoal.setText(Float.toString(userData.weightGoal));
+            }
         }
     }
 
@@ -86,8 +88,9 @@ public class ProfilePage extends AppCompatActivity {
 
                 // Save the information into the database
                 userProfile = new Profile();
-                boolean savedProfile = userProfile.set(userData);
+                boolean savedProfile = userProfile.set(profileData);
                 Toast.makeText(this, R.string.profileUpdated, Toast.LENGTH_LONG).show();
+                MainActivity.profile = profileData;
                 // Return to Home Page
                 finish();
             }

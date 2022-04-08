@@ -44,12 +44,9 @@ public class Profile {
         try {
 
             db.execSQL("CREATE TABLE IF NOT EXISTS Profile(name VARCHAR, weight DOUBLE, height DOUBLE, togo DOUBLE)");
+            db.execSQL("delete from Profile");
             String sql;
-            if (MainActivity.profile.name == null) {
-                sql = "INSERT INTO Profile (name, weight, height, togo) VALUES ('" + userProfile.name + "'," + userProfile.weight + "," + userProfile.height + "," + userProfile.weightGoal + " )";
-            } else {
-                sql = "UPDATE Profile set name='" + userProfile.name + "', weight=" +userProfile.weight + ", height=" +userProfile.height + ", togo=" +userProfile.weightGoal +  "";
-            }
+            sql = "INSERT INTO Profile (name, weight, height, togo) VALUES ('" + userProfile.name + "'," + userProfile.weight + "," + userProfile.height + "," + userProfile.weightGoal + " )";
             db.execSQL(sql);
             return true;
         } catch (Exception e) {
