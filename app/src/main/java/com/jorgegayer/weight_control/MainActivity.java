@@ -2,6 +2,9 @@ package com.jorgegayer.weight_control;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -11,6 +14,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import java.util.LinkedList;
+
 public class MainActivity extends AppCompatActivity {
     //public static SQLiteDatabase db;
     public static Context context;
@@ -18,18 +23,38 @@ public class MainActivity extends AppCompatActivity {
     public static SQLiteDatabase db;
     Profile userProfile = new Profile();
 
+    private LinkedList<WeightData> mWeightList = new LinkedList<>();
+    private RecyclerView mRecyclerView;
+    private WeightListAdapter mAdapter;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         context = getApplicationContext();
+        mRecyclerView = findViewById(R.id.recyclerview);
         createDatabase();
         userProfile.db = db;
         profile = userProfile.get();
 
         if (profile.name == null) {
             startActivity(new Intent(MainActivity.this, ProfilePage.class));
+        }else {
+            Weight weight = new Weight();
+            mWeightList = weight.getAll();
+            // Get a handle to the RecyclerView.
+            if (mWeightList.size() != 0) {
+
+                // Create an adapter and supply the data to be displayed.
+                mAdapter = new WeightListAdapter(this, mWeightList);
+                // Connect the adapter with the RecyclerView.
+                mRecyclerView.setAdapter(mAdapter);
+//                // Give the RecyclerView a default layout manager.
+                mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+            }
         }
+
     }
     public void createDatabase() {
         try {

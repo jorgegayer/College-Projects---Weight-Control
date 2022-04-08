@@ -3,12 +3,21 @@ package com.jorgegayer.weight_control;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import android.database.sqlite.SQLiteStatement;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -32,10 +41,6 @@ public class AddWeight extends AppCompatActivity {
         lblDate = findViewById(R.id.lblDate);
         txtGoal = findViewById(R.id.txtGoal);
         txtToGo = findViewById(R.id.txtToGo);
-
-
-
-
         loadFields();
         if (savedInstanceState != null) {
             txtWeight.setText(savedInstanceState.getString("txtWeight"));
@@ -45,7 +50,6 @@ public class AddWeight extends AppCompatActivity {
         }
 
     }
-
     private void loadFields() {
         Calendar cal = Calendar.getInstance();
         Date todaysdate = cal.getTime();
@@ -70,17 +74,16 @@ public class AddWeight extends AppCompatActivity {
     }
 
     public void saveWeight(View view) {
-        float weight;
-        String date;
-
+        WeightData weightData = new WeightData();
+        Weight weight = new Weight();
         try {
             if (validateFields()) {
-                weight = Float.parseFloat(txtWeight.getText().toString());
-                date = lblDate.getText().toString();
-                // Save the information into the database
+                weightData.weight = Float.parseFloat(txtWeight.getText().toString());
+                weightData.date = lblDate.getText().toString();
+                weightData.bmi = 0;
+                weight.set(weightData);
                 // ...
                 Toast.makeText(this, "New weight saved successfully!", Toast.LENGTH_LONG).show();
-                // Return to Home Page
                 finish();
             }
         } catch (ParseException e) {
@@ -112,12 +115,13 @@ public class AddWeight extends AppCompatActivity {
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putString("txtWeight", txtWeight.getText().toString());
-        outState.putString("txtGoal", txtGoal.getText().toString());
-        outState.putString("txtToGo", txtToGo.getText().toString());
-        outState.putString("lblDate", lblDate.getText().toString());
-    }
+        public void onSaveInstanceState(Bundle outState) {
+            super.onSaveInstanceState(outState);
+            outState.putString("txtWeight", txtWeight.getText().toString());
+            outState.putString("txtGoal", txtGoal.getText().toString());
+            outState.putString("txtToGo", txtToGo.getText().toString());
+            outState.putString("lblDate", lblDate.getText().toString());
+        }
 
-}
+
+    }

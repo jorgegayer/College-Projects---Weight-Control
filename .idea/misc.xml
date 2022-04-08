@@ -7,8 +7,10 @@
         <entry key="..\:/Work/Android/Weight-Control/app/src/main/res/layout/activity_add_weight.xml" value="0.3625" />
         <entry key="..\:/Work/Android/Weight-Control/app/src/main/res/layout/activity_main.xml" value="0.3625" />
         <entry key="app/src/main/res/layout/activity_add_weight.xml" value="0.3338541666666667" />
+        <entry key="app/src/main/res/layout/activity_line_item.xml" value="0.3338541666666667" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2833333333333333" />
         <entry key="app/src/main/res/layout/activity_profile_page.xml" value="0.2833333333333333" />
+        <entry key="app/src/main/res/layout/activity_weight_history.xml" value="0.2328125" />
       </map>
     </option>
   </component>

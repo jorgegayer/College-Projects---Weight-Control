@@ -42,7 +42,7 @@ public class Profile {
 
     public boolean set(ProfileData userProfile) {
         try {
-            db.execSQL("CREATE TABLE IF NOT EXISTS Profile(name VARCHAR, weight DOUBLE, height DOUBLE, goal DOUBLE)");
+            db.execSQL("CREATE TABLE IF NOT EXISTS Profile(userid INTEGER PRIMARY KEY, name VARCHAR, weight DOUBLE, height DOUBLE, goal DOUBLE)");
             db.execSQL("delete from Profile");
             String sql;
             sql = "INSERT INTO Profile (name, weight, height, goal) VALUES ('" + userProfile.name + "'," + userProfile.weight + "," + userProfile.height + "," + userProfile.weightGoal + " )";
@@ -52,5 +52,15 @@ public class Profile {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public void update(double weight) {
+        try {
+            String sql;
+            sql = "UPDATE Profile SET weight = " + weight;
+            db.execSQL(sql);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
