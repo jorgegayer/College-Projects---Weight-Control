@@ -9,6 +9,7 @@ public class Profile {
     public SQLiteDatabase db;
     public Profile() {
         profileInfo = new ProfileData();
+        db = MainActivity.db;
     }
 
     boolean checkProfile() {

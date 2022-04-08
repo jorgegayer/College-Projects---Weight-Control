@@ -85,6 +85,7 @@ public class ProfilePage extends AppCompatActivity {
                 profileData.weightGoal = goal;
 
                 // Save the information into the database
+                userProfile = new Profile();
                 boolean savedProfile = userProfile.set(userData);
                 Toast.makeText(this, R.string.profileUpdated, Toast.LENGTH_LONG).show();
                 // Return to Home Page

@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         userProfile.db = db;
         profile = userProfile.get();
 
-        if (profile != null) {
+        if (profile.name == null) {
             startActivity(new Intent(MainActivity.this, ProfilePage.class));
         }
     }
@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        db.close();
     }
     // Temporary use
     public void callProfile(View view) {
