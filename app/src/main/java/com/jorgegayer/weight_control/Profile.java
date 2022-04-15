@@ -7,10 +7,12 @@ import android.provider.ContactsContract;
 public class Profile {
     private ProfileData profileInfo;
     public SQLiteDatabase db;
+
     public Profile() {
         profileInfo = new ProfileData();
         db = MainActivity.db;
     }
+
     boolean checkProfile() {
         return false;
     }

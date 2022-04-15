@@ -27,6 +27,7 @@ public class WeightListAdapter extends
             mInflater = LayoutInflater.from(context);
             this.mWeightList = mWeightList;
         }
+
         //class WeightViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         class WeightViewHolder extends RecyclerView.ViewHolder {
             public TextView weightItemView;
@@ -100,6 +101,4 @@ public class WeightListAdapter extends
         public int getItemCount() {
             return mWeightList.size();
         }
-
-
 }

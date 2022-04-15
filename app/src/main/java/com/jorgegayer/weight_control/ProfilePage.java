@@ -1,9 +1,11 @@
 package com.jorgegayer.weight_control;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,6 +46,7 @@ public class ProfilePage extends AppCompatActivity {
                 editTextGoal.setText(Float.toString(userData.weightGoal));
             }
         }
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private boolean validateFields() {
@@ -64,7 +67,6 @@ public class ProfilePage extends AppCompatActivity {
             Toast.makeText(this, R.string.validateHeight, Toast.LENGTH_LONG).show();
             return false;
         }
-
         return true;
     }
 
@@ -97,9 +99,16 @@ public class ProfilePage extends AppCompatActivity {
             }
         }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
-
-        @Override
+    @Override
         public void onSaveInstanceState(Bundle outState) {
             super.onSaveInstanceState(outState);
             outState.putString("editTextName", editTextName.getText().toString());

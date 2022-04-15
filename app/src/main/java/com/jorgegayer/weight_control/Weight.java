@@ -4,8 +4,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 public class Weight {
     private ArrayList<WeightData> weightHistory;
@@ -36,7 +40,6 @@ public class Weight {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return localHistory;
     }
 
@@ -46,10 +49,11 @@ public class Weight {
     }
 
     void set(WeightData myData) {
+        float bmi = caculateBMI();
         try {
             db.execSQL("CREATE TABLE IF NOT EXISTS Weight(weightid INTEGER PRIMARY KEY, weight DOUBLE, date DATETIME, bmi DOUBLE)");
             String sql;
-            sql = "INSERT INTO Weight (weight, date, bmi) VALUES (" + myData.weight + ",'" + myData.date + "'," + myData.bmi + " )";
+            sql = "INSERT INTO Weight (weight, date, bmi) VALUES (" + myData.weight + ",'" + myData.date + "'," + bmi + " )";
             db.execSQL(sql);
             Profile profile = new Profile();
             profile.update(myData.weight);
@@ -58,13 +62,38 @@ public class Weight {
         }
     }
 
-
     void delete(String date) {
 
     }
 
     private float caculateBMI () {
         float localBMI = 0;
+
+//        String url = "https://body-mass-index-bmi-calculator.p.rapidapi.com/metric?weight=150&height=1.83";
+//        StringRequest stringRequest;
+//        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, url,
+//                null, new Response.Listener<JSONObject>() {
+//
+//            @Override
+//            public void onResponse(JSONObject response) {
+//                Toast.makeText(MainActivity.context, response.toString(), Toast.LENGTH_SHORT).show();
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//
+//            }
+//        }) {
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                HashMap<String, String> headers = new HashMap<String, String>();
+//                headers.put("X-RapidAPI-Host", "body-mass-index-bmi-calculator.p.rapidapi.com");
+//                headers.put("X-RapidAPI-Key", "cbbb1effdbmshff313e7063b8f75p115187jsncadf1dd4abc5");
+//                return headers;
+//            }
+//        };
+
         return localBMI;
     }
 

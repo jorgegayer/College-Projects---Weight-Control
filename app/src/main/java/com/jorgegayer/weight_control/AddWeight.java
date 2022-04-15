@@ -1,5 +1,7 @@
 package com.jorgegayer.weight_control;
 
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
@@ -7,6 +9,7 @@ import android.database.sqlite.SQLiteStatement;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -32,6 +35,15 @@ public class AddWeight extends AppCompatActivity {
     public ProfileData userProfile;
 
     @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_weight);
@@ -48,8 +60,9 @@ public class AddWeight extends AppCompatActivity {
             txtGoal.setText(savedInstanceState.getString("txtGoal"));
             txtToGo.setText(savedInstanceState.getString("txtToGo"));
         }
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
     private void loadFields() {
         Calendar cal = Calendar.getInstance();
         Date todaysdate = cal.getTime();
@@ -122,6 +135,4 @@ public class AddWeight extends AppCompatActivity {
             outState.putString("txtToGo", txtToGo.getText().toString());
             outState.putString("lblDate", lblDate.getText().toString());
         }
-
-
     }

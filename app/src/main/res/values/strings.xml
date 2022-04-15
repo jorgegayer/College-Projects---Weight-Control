@@ -15,4 +15,5 @@
     <string name="validateHeight">The height value must be between 20 and 300cm</string>
     <string name="completeFields">Please complete all fields</string>
     <string name="profileUpdated">Profile successfully updated!</string>
+    <string name="profile_icon_label">Profile</string>
 </resources>
