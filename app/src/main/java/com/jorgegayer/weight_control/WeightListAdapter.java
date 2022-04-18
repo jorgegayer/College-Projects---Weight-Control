@@ -90,7 +90,7 @@ public class WeightListAdapter extends
         public void onBindViewHolder(@NonNull WeightViewHolder holder, int position) {
             String mWeight = Double.toString(mWeightList.get(position).weight);
             String mDate = mWeightList.get(position).date;
-            String mBmi = Double.toString(mWeightList.get(position).bmi);
+            String mBmi = mWeightList.get(position).bmi;
 
             holder.weightItemView.setText(mWeight);
             holder.dateItemView.setText(mDate);

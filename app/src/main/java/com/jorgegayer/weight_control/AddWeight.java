@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import android.content.Context;
 import android.database.sqlite.SQLiteStatement;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ public class AddWeight extends AppCompatActivity {
     private TextView txtToGo;
     private TextView lblDate;
     public ProfileData userProfile;
+    public static Context context;
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -47,7 +49,7 @@ public class AddWeight extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_weight);
-
+        context = getApplicationContext();
         userProfile = MainActivity.profile;
         txtWeight = findViewById(R.id.txtWeight);
         lblDate = findViewById(R.id.lblDate);
@@ -93,10 +95,8 @@ public class AddWeight extends AppCompatActivity {
             if (validateFields()) {
                 weightData.weight = Float.parseFloat(txtWeight.getText().toString());
                 weightData.date = lblDate.getText().toString();
-                weightData.bmi = 0;
+                weightData.bmi = "0";
                 weight.set(weightData);
-                // ...
-                Toast.makeText(this, "New weight saved successfully!", Toast.LENGTH_LONG).show();
                 finish();
             }
         } catch (ParseException e) {

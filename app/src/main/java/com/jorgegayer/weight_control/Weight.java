@@ -2,8 +2,18 @@ package com.jorgegayer.weight_control;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -17,7 +27,7 @@ public class Weight {
     public Weight() {
         db = MainActivity.db;
     }
-
+    public static String calculatedBMI = "0";
     LinkedList<WeightData> getAll() {
         LinkedList<WeightData> localHistory = new LinkedList<>();
         try {
@@ -32,7 +42,7 @@ public class Weight {
                 WeightData weightData = new WeightData();
                 weightData.weight =query.getFloat(weightIndex);
                 weightData.date =  query.getString(dateIndex);
-                weightData.bmi =  query.getFloat(bmiIndex);
+                weightData.bmi =  round(query.getFloat(bmiIndex));
                 localHistory.add(weightData);
                 query.moveToNext();
             }
@@ -49,52 +59,57 @@ public class Weight {
     }
 
     void set(WeightData myData) {
-        float bmi = caculateBMI();
-        try {
-            db.execSQL("CREATE TABLE IF NOT EXISTS Weight(weightid INTEGER PRIMARY KEY, weight DOUBLE, date DATETIME, bmi DOUBLE)");
-            String sql;
-            sql = "INSERT INTO Weight (weight, date, bmi) VALUES (" + myData.weight + ",'" + myData.date + "'," + bmi + " )";
-            db.execSQL(sql);
-            Profile profile = new Profile();
-            profile.update(myData.weight);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        RequestQueue queue = Volley.newRequestQueue(MainActivity.context);
+        String url = "https://body-mass-index-bmi-calculator.p.rapidapi.com/metric?weight=" + myData.weight +"&height=" + MainActivity.profile.height/100;
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, url,
+                null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    calculatedBMI = response.getString ("bmi");
+                    try {
+                        db.execSQL("CREATE TABLE IF NOT EXISTS Weight(weightid INTEGER PRIMARY KEY, weight DOUBLE, date DATETIME, bmi VARCHAR)");
+                        String sql;
+                        sql = "INSERT INTO Weight (weight, date, bmi) VALUES (" + myData.weight + ",'" + myData.date + "','" + calculatedBMI + "')";
+                        db.execSQL(sql);
+                        Profile profile = new Profile();
+                        profile.update(myData.weight);
+                        Toast.makeText(MainActivity.context, "New weight saved successfully!", Toast.LENGTH_LONG).show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    Log.i("myResponse", calculatedBMI);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                Log.i("myResponse", response.toString());
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-RapidAPI-Host", "body-mass-index-bmi-calculator.p.rapidapi.com");
+                headers.put("X-RapidAPI-Key", "cbbb1effdbmshff313e7063b8f75p115187jsncadf1dd4abc5");
+                return headers;
+            }
+        };
+        queue.add(req);
     }
 
     void delete(String date) {
 
     }
 
-    private float caculateBMI () {
-        float localBMI = 0;
-
-//        String url = "https://body-mass-index-bmi-calculator.p.rapidapi.com/metric?weight=150&height=1.83";
-//        StringRequest stringRequest;
-//        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, url,
-//                null, new Response.Listener<JSONObject>() {
-//
-//            @Override
-//            public void onResponse(JSONObject response) {
-//                Toast.makeText(MainActivity.context, response.toString(), Toast.LENGTH_SHORT).show();
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//
-//
-//            }
-//        }) {
-//            @Override
-//            public Map<String, String> getHeaders() throws AuthFailureError {
-//                HashMap<String, String> headers = new HashMap<String, String>();
-//                headers.put("X-RapidAPI-Host", "body-mass-index-bmi-calculator.p.rapidapi.com");
-//                headers.put("X-RapidAPI-Key", "cbbb1effdbmshff313e7063b8f75p115187jsncadf1dd4abc5");
-//                return headers;
-//            }
-//        };
-
-        return localBMI;
+    public static String round(double value) {
+        long factor = (long) Math.pow(10, 2);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return Float.toString((float) tmp / factor);
     }
 
     private float caculateToGo () {

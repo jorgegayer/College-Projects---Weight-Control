@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,6 +20,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import java.util.LinkedList;
+import java.util.concurrent.DelayQueue;
 
 public class MainActivity extends AppCompatActivity {
     //public static SQLiteDatabase db;
@@ -101,6 +103,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        populateWeight();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                populateWeight();
+            }
+        }, 3000);
+
     }
 }
