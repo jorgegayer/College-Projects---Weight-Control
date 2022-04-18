@@ -42,40 +42,9 @@ public class WeightListAdapter extends
                 bmiItemView = itemView.findViewById(R.id.txtHistBmi);
                 this.mAdapter = adapter;
 
-                //itemView.setOnClickListener(this);
             }
 
-            //@Override
-//            public void onClick(View view) {
-//                // Get the position of the item that was clicked.
-//                int mPosition = getLayoutPosition();
-//// Use that to access the affected item in mWeightList.
-//                String element = mWeightList.get(mPosition);
-//// Change the Weight in the mWeightList.
-//
-//                try {
-//                    db=MainActivity.context.openOrCreateDatabase("WeightDatabase", MainActivity.context.MODE_PRIVATE, null);
-//                    db.beginTransaction();
-//
-//                    String sql="DELETE FROM MyTable WHERE Weight=(?)";
-//                    SQLiteStatement statement=db.compileStatement(sql);
-//                    statement.clearBindings();
-//                    statement.bindString(1, element);
-//                    statement.executeUpdateDelete();
-//                    db.setTransactionSuccessful();
-//                }
-//                catch (Exception e)
-//                {
-//                    e.printStackTrace();
-//                }
-//                finally {
-//                    db.endTransaction();
-//                }
-//                mWeightList.set(mPosition, "Deleted!");
-//// Notify the adapter, that the data has changed so it can
-//// update the RecyclerView to display the data.
-//                mAdapter.notifyDataSetChanged();
-//            }
+
         }
 
         @Override
