@@ -16,4 +16,11 @@
     <string name="completeFields">Please complete all fields</string>
     <string name="profileUpdated">Profile successfully updated!</string>
     <string name="profile_icon_label">Profile</string>
+    <string name="current_bmi">Current BMI</string>
+    <string name="weight_goal">Weight Goal</string>
+    <string name="to_go">To Go</string>
+    <string name="weight">Weight</string>
+    <string name="date">Date</string>
+    <string name="enter_weight_in_kg">Enter weight in kg</string>
+    <string name="save">Save</string>
 </resources>

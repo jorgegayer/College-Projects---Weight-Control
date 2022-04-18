@@ -28,7 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Current BMI"
+                android:text="@string/current_bmi"
                 android:textSize="16sp" />
 
             <TextView
@@ -36,7 +36,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="28.2kg"
                 android:textAlignment="textEnd"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -51,7 +50,7 @@
                 android:layout_width="72dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Weight Goal"
+                android:text="@string/weight_goal"
                 android:textSize="16sp" />
 
             <TextView
@@ -59,7 +58,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="85kg"
                 android:textAlignment="textEnd"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -74,7 +72,7 @@
                 android:layout_width="88dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="To Go"
+                android:text="@string/to_go"
                 android:textSize="16sp" />
 
             <TextView
@@ -82,7 +80,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="4kg"
                 android:textAlignment="textEnd"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -93,7 +90,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
-        android:text="Weight"
+        android:text="@string/weight"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -117,7 +114,6 @@
             android:layout_width="135dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Mar 18 2022"
             android:textAlignment="center" />
 
         <Button
@@ -127,7 +123,8 @@
             android:layout_marginStart="10dp"
             android:layout_weight="1"
             android:onClick="showDate"
-            android:text="Date" />
+            android:text="@string/date"
+            tools:ignore="UsingOnClickInXml" />
 
     </LinearLayout>
 
@@ -137,23 +134,25 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="Enter weight in kg"
+        android:hint="@string/enter_weight_in_kg"
         android:inputType="numberDecimal"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        android:importantForAutofill="no" />
 
     <Button
         android:id="@+id/btnSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
-        android:text="Save"
+        android:text="@string/save"
         android:onClick="saveWeight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtWeight" />
+        app:layout_constraintTop_toBottomOf="@+id/txtWeight"
+        tools:ignore="UsingOnClickInXml" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

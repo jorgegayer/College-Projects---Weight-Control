@@ -32,7 +32,7 @@ public class Weight {
     LinkedList<WeightData> getAll() {
         LinkedList<WeightData> localHistory = new LinkedList<>();
         try {
-            Cursor query = db.rawQuery("SELECT * FROM Weight",null);
+            Cursor query = db.rawQuery("SELECT * FROM Weight order by Date asc",null);
             int weightIndex = query.getColumnIndex("weight");
             int dateIndex = query.getColumnIndex("date");
             int bmiIndex = query.getColumnIndex("bmi");

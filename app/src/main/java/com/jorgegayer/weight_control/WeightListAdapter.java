@@ -41,10 +41,7 @@ public class WeightListAdapter extends
                 dateItemView = itemView.findViewById(R.id.txtHistDate);
                 bmiItemView = itemView.findViewById(R.id.txtHistBmi);
                 this.mAdapter = adapter;
-
             }
-
-
         }
 
         @Override

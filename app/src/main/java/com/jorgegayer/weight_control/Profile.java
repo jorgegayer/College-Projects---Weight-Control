@@ -1,8 +1,16 @@
 package com.jorgegayer.weight_control;
 
+import static android.content.Intent.getIntent;
+
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
 import android.provider.ContactsContract;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class Profile {
     private ProfileData profileInfo;
@@ -49,6 +57,14 @@ public class Profile {
             String sql;
             sql = "INSERT INTO Profile (name, weight, height, goal) VALUES ('" + userProfile.name + "'," + userProfile.weight + "," + userProfile.height + "," + userProfile.weightGoal + " )";
             db.execSQL(sql);
+            Weight weight = new Weight();
+            WeightData myData = new WeightData();
+            Calendar cal = Calendar.getInstance();
+            Date todaysdate = cal.getTime();
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            myData.date =  dateFormat.format(todaysdate);
+            myData.weight = userProfile.weight;
+            weight.set(myData);
             return true;
         } catch (Exception e) {
             e.printStackTrace();

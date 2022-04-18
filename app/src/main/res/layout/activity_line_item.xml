@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="Date" />
+        />
 
     <TextView
         android:id="@+id/txtHistWeight"
@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="Weight" />
+         />
 
     <TextView
         android:id="@+id/txtHistBmi"
@@ -33,6 +33,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="BMI" />
+         />
 
 </LinearLayout>
