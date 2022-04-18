@@ -28,7 +28,7 @@ public class Weight {
     LinkedList<WeightData> getAll() {
         LinkedList<WeightData> localHistory = new LinkedList<>();
         try {
-            @SuppressLint("Recycle") Cursor query = db.rawQuery("SELECT * FROM Weight order by Date asc",null);
+            @SuppressLint("Recycle") Cursor query = db.rawQuery("SELECT * FROM Weight order by Date desc",null);
             int weightIndex = query.getColumnIndex("weight");
             int dateIndex = query.getColumnIndex("date");
             int bmiIndex = query.getColumnIndex("bmi");
