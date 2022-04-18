@@ -1,11 +1,9 @@
 package com.jorgegayer.weight_control;
 
-import static android.content.Intent.getIntent;
 
+import android.annotation.SuppressLint;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Bundle;
-import android.provider.ContactsContract;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -13,17 +11,12 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Profile {
-    private ProfileData profileInfo;
     public SQLiteDatabase db;
 
     public Profile() {
-        profileInfo = new ProfileData();
         db = MainActivity.db;
     }
 
-    boolean checkProfile() {
-        return false;
-    }
 
     public ProfileData get() {
         ProfileData userProfile = new ProfileData();
@@ -39,9 +32,9 @@ public class Profile {
             if (query == null) return null;
 
             userProfile.name = query.getString(nameIndex);
-            userProfile.weight = Float.parseFloat(query.getString(weightIndex).toString());
-            userProfile.height = Float.parseFloat(query.getString(heightIndex).toString());
-            userProfile.weightGoal = Float.parseFloat(query.getString(goalIndex).toString());
+            userProfile.weight = Float.parseFloat(query.getString(weightIndex));
+            userProfile.height = Float.parseFloat(query.getString(heightIndex));
+            userProfile.weightGoal = Float.parseFloat(query.getString(goalIndex));
             userProfile.togo = userProfile.weightGoal - userProfile.weight;
 
         } catch (Exception e) {
@@ -61,7 +54,7 @@ public class Profile {
             WeightData myData = new WeightData();
             Calendar cal = Calendar.getInstance();
             Date todaysdate = cal.getTime();
-            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             myData.date =  dateFormat.format(todaysdate);
             myData.weight = userProfile.weight;
             weight.set(myData);

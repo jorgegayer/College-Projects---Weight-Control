@@ -1,5 +1,6 @@
 package com.jorgegayer.weight_control;
 
+import android.annotation.SuppressLint;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
@@ -8,22 +9,17 @@ import android.widget.Toast;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
 
 public class Weight {
-    private ArrayList<WeightData> weightHistory;
     public SQLiteDatabase db;
     public Weight() {
         db = MainActivity.db;
@@ -32,7 +28,7 @@ public class Weight {
     LinkedList<WeightData> getAll() {
         LinkedList<WeightData> localHistory = new LinkedList<>();
         try {
-            Cursor query = db.rawQuery("SELECT * FROM Weight order by Date asc",null);
+            @SuppressLint("Recycle") Cursor query = db.rawQuery("SELECT * FROM Weight order by Date asc",null);
             int weightIndex = query.getColumnIndex("weight");
             int dateIndex = query.getColumnIndex("date");
             int bmiIndex = query.getColumnIndex("bmi");
@@ -54,43 +50,33 @@ public class Weight {
         return localHistory;
     }
 
-    WeightData get(String date) {
-        WeightData myData = new WeightData();
-        return myData;
-    }
 
     void set(WeightData myData) {
         RequestQueue queue = Volley.newRequestQueue(MainActivity.context);
         String url = "https://body-mass-index-bmi-calculator.p.rapidapi.com/metric?weight=" + myData.weight +"&height=" + MainActivity.profile.height/100;
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, url,
-                null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    calculatedBMI = response.getString ("bmi");
+                null, response -> {
                     try {
-                        db.execSQL("CREATE TABLE IF NOT EXISTS Weight(weightid INTEGER PRIMARY KEY, weight DOUBLE, date DATETIME, bmi VARCHAR)");
-                        String sql;
-                        sql = "INSERT INTO Weight (weight, date, bmi) VALUES (" + myData.weight + ",'" + myData.date + "','" + calculatedBMI + "')";
-                        db.execSQL(sql);
-                        Profile profile = new Profile();
-                        profile.update(myData.weight);
-                        Toast.makeText(MainActivity.context, "New weight saved successfully!", Toast.LENGTH_LONG).show();
-                    } catch (Exception e) {
+                        calculatedBMI = response.getString ("bmi");
+                        try {
+                            db.execSQL("CREATE TABLE IF NOT EXISTS Weight(weightid INTEGER PRIMARY KEY, weight DOUBLE, date DATETIME, bmi VARCHAR)");
+                            String sql;
+                            sql = "INSERT INTO Weight (weight, date, bmi) VALUES (" + myData.weight + ",'" + myData.date + "','" + calculatedBMI + "')";
+                            db.execSQL(sql);
+                            Profile profile = new Profile();
+                            profile.update(myData.weight);
+                            Toast.makeText(MainActivity.context, "New weight saved successfully!", Toast.LENGTH_LONG).show();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        Log.i("myResponse", calculatedBMI);
+                    } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    Log.i("myResponse", calculatedBMI);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                Log.i("myResponse", response.toString());
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+                    Log.i("myResponse", response.toString());
+                }, error -> {
 
-            }
-        }) {
+                }) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
@@ -113,8 +99,4 @@ public class Weight {
         return Float.toString((float) tmp / factor);
     }
 
-    private float caculateToGo () {
-        float localToGo = 0;
-        return localToGo;
-    }
 }

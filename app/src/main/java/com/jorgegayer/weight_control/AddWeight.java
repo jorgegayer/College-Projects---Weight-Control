@@ -1,27 +1,18 @@
 package com.jorgegayer.weight_control;
 
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.database.sqlite.SQLiteStatement;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -34,6 +25,7 @@ public class AddWeight extends AppCompatActivity {
     private TextView txtToGo;
     private TextView lblDate;
     public ProfileData userProfile;
+    @SuppressLint("StaticFieldLeak")
     public static Context context;
 
     @Override

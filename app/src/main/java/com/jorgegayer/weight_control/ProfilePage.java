@@ -2,25 +2,25 @@ package com.jorgegayer.weight_control;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteStatement;
+
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.util.Objects;
 
 public class ProfilePage extends AppCompatActivity {
     private EditText editTextName;
     private EditText editTextWeight;
     private EditText editTextHeight;
     private EditText editTextGoal;
-    private Button saveProfile;
-    private SQLiteDatabase db;
     Profile userProfile;
     ProfileData userData;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +30,6 @@ public class ProfilePage extends AppCompatActivity {
         editTextWeight = findViewById(R.id.editTextWeight);
         editTextHeight = findViewById(R.id.editTextHeight);
         editTextGoal = findViewById(R.id.editTextGoal);
-        saveProfile = findViewById(R.id.btnSaveProfile);
 
         if (savedInstanceState != null) {
             editTextName.setText(savedInstanceState.getString("editTextName"));
@@ -46,7 +45,7 @@ public class ProfilePage extends AppCompatActivity {
                 editTextGoal.setText(Float.toString(userData.weightGoal));
             }
         }
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
     }
 
     private boolean validateFields() {
@@ -91,7 +90,6 @@ public class ProfilePage extends AppCompatActivity {
 
                 // Save the information into the database
                 userProfile = new Profile();
-                boolean savedProfile = userProfile.set(profileData);
                 Toast.makeText(this, R.string.profileUpdated, Toast.LENGTH_LONG).show();
                 MainActivity.profile = profileData;
                 // Return to Home Page
@@ -109,7 +107,7 @@ public class ProfilePage extends AppCompatActivity {
     }
 
     @Override
-        public void onSaveInstanceState(Bundle outState) {
+        public void onSaveInstanceState(@NonNull Bundle outState) {
             super.onSaveInstanceState(outState);
             outState.putString("editTextName", editTextName.getText().toString());
             outState.putString("editTextHeight", editTextHeight.getText().toString());
