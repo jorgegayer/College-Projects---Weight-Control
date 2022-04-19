@@ -27,4 +27,7 @@
     <string name="date_list">Date</string>
     <string name="weight_list">Weight</string>
     <string name="bmi_list">BMI</string>
+    <string name="current_weight_history">Current Weight</string>
+    <string name="weight_goal_history">Weight Goal</string>
+    <string name="to_go_history">To Go</string>
 </resources>
