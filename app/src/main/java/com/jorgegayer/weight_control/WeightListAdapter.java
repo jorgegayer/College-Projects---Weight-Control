@@ -29,6 +29,7 @@ public class WeightListAdapter extends
             public TextView weightItemView;
             public TextView dateItemView;
             public TextView bmiItemView;
+
             final WeightListAdapter mAdapter;
 
             public WeightViewHolder(View itemView, WeightListAdapter adapter) {
@@ -36,6 +37,7 @@ public class WeightListAdapter extends
                 weightItemView = itemView.findViewById(R.id.txtHistWeight);
                 dateItemView = itemView.findViewById(R.id.txtHistDate);
                 bmiItemView = itemView.findViewById(R.id.txtHistBmi);
+
                 this.mAdapter = adapter;
             }
         }
@@ -58,6 +60,8 @@ public class WeightListAdapter extends
             holder.weightItemView.setText(mWeight);
             holder.dateItemView.setText(mDate);
             holder.bmiItemView.setText(mBmi);
+
+
         }
 
         @Override

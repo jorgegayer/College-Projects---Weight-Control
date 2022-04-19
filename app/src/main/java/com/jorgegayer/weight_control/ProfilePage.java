@@ -90,6 +90,7 @@ public class ProfilePage extends AppCompatActivity {
 
                 // Save the information into the database
                 userProfile = new Profile();
+                userProfile.set(profileData);
                 Toast.makeText(this, R.string.profileUpdated, Toast.LENGTH_LONG).show();
                 MainActivity.profile = profileData;
                 // Return to Home Page

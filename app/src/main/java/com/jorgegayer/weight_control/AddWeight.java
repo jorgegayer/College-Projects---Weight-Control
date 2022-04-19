@@ -21,6 +21,7 @@ import java.util.Date;
 
 public class AddWeight extends AppCompatActivity {
     private EditText txtWeight;
+    private TextView txtCurrentWeight;
     private TextView txtGoal;
     private TextView txtToGo;
     private TextView lblDate;
@@ -47,12 +48,14 @@ public class AddWeight extends AppCompatActivity {
         lblDate = findViewById(R.id.lblDate);
         txtGoal = findViewById(R.id.txtGoal);
         txtToGo = findViewById(R.id.txtToGo);
+        txtCurrentWeight =findViewById(R.id.txtCurrentWeightAdd);
         loadFields();
         if (savedInstanceState != null) {
             txtWeight.setText(savedInstanceState.getString("txtWeight"));
             lblDate.setText(savedInstanceState.getString("lblDate"));
             txtGoal.setText(savedInstanceState.getString("txtGoal"));
             txtToGo.setText(savedInstanceState.getString("txtToGo"));
+            txtCurrentWeight.setText(savedInstanceState.getString("txtCurrentWeight"));
         }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
@@ -66,6 +69,7 @@ public class AddWeight extends AppCompatActivity {
         txtWeight.setText(Double.toString(userProfile.weight));
         txtGoal.setText(Double.toString(userProfile.weightGoal));
         txtToGo.setText(Double.toString(userProfile.togo));
+        txtCurrentWeight.setText( Double.toString(userProfile.weight));
     }
 
     // Here now just to have part of the implementation done
@@ -126,5 +130,6 @@ public class AddWeight extends AppCompatActivity {
             outState.putString("txtGoal", txtGoal.getText().toString());
             outState.putString("txtToGo", txtToGo.getText().toString());
             outState.putString("lblDate", lblDate.getText().toString());
+            outState.putString("txtCurrentWeight", txtCurrentWeight.getText().toString());
         }
     }

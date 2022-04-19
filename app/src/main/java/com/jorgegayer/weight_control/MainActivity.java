@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.LinkedList;
 
@@ -24,6 +25,10 @@ public class MainActivity extends AppCompatActivity {
     public static Context context;
     public static ProfileData profile;
     public static SQLiteDatabase db;
+    private TextView txtCurrentWeight;
+    private TextView txtGoal;
+    private TextView txtToGo;
+
     Profile userProfile = new Profile();
 
     private RecyclerView mRecyclerView;
@@ -37,13 +42,25 @@ public class MainActivity extends AppCompatActivity {
         createDatabase();
         userProfile.db = db;
         profile = userProfile.get();
+        txtCurrentWeight = findViewById(R.id.txtCurrentWeightHistory);
+        txtGoal= findViewById(R.id.txtWeightGoalHistory);
+        txtToGo= findViewById(R.id.txtToGoHistory);
+
 
         if (profile.name == null) {
             startActivity(new Intent(MainActivity.this, ProfilePage.class));
         } else {
             populateWeight();
+            populatePanel();
         }
     }
+
+    private void populatePanel() {
+        txtCurrentWeight.setText(Float.toString(MainActivity.profile.weight));
+        txtGoal.setText(Float.toString(MainActivity.profile.weightGoal));
+        txtToGo.setText(Float.toString(MainActivity.profile.togo));
+    }
+
 
     public void populateWeight() {
         Weight weight = new Weight();
