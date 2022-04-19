@@ -6,18 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ProfilePage">
 
-    <TextView
-        android:id="@+id/txtViewProfileTittle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:text="@string/profile_tittle"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="@color/general_font"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:id="@+id/txtViewProfileTittle"
@@ -26,7 +14,7 @@
             android:layout_marginTop="80dp"
             android:text="@string/profile_tittle"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@android:color/primary_text_light"
+            android:textColor="@color/general_font"
             android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -156,4 +144,3 @@
             tools:ignore="UsingOnClickInXml" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
