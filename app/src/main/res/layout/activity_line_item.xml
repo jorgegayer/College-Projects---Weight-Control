@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textAlignment="textStart"
+        android:textColor="@color/general_font"
         android:textSize="18sp" />
 
     <TextView
@@ -25,6 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textAlignment="center"
+        android:textColor="@color/general_font"
         android:textSize="18sp" />
 
     <TextView
@@ -34,6 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textAlignment="textEnd"
+        android:textColor="@color/general_font"
         android:textSize="18sp" />
 
 </LinearLayout>
