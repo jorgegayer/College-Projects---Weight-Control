@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (profile.name == null) {
             startActivity(new Intent(MainActivity.this, ProfilePage.class));
+            populatePanel();
         } else {
             populateWeight();
             populatePanel();
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void populatePanel() {
+        profile = userProfile.get();
         txtCurrentWeight.setText(Float.toString(MainActivity.profile.weight));
         txtGoal.setText(Float.toString(MainActivity.profile.weightGoal));
         txtToGo.setText(Float.toString(MainActivity.profile.togo));
@@ -89,7 +91,6 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("weight", profile.weightGoal);
         intent.putExtra("togo", profile.togo);
          startActivity(intent);
-        populateWeight();
     }
 
     @Override
@@ -110,7 +111,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        new Handler().postDelayed(this::populateWeight, 3000);
+        new Handler().postDelayed(() -> {
+            populatePanel();
+            populateWeight();
+        }, 2000);
 
     }
 }

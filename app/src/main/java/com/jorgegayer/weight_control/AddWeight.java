@@ -1,11 +1,13 @@
 package com.jorgegayer.weight_control;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -80,7 +82,9 @@ public class AddWeight extends AppCompatActivity {
 
     // Here now just to have part of the implementation done
     public void processDatePickerResult(int year, int month, int day) {
-        String receivedDate = Integer.toString(day) + "/" + Integer.toString(month+1) + "/" + Integer.toString(year);
+        String sDay = Integer.toString(day).length()==2? Integer.toString(day): "0" + Integer.toString(day);
+        String sMonth = Integer.toString(month+1).length()==2? Integer.toString(month+1): "0" + Integer.toString(month+1);
+        String receivedDate = sDay + "/" + sMonth + "/" + Integer.toString(year);
         lblDate.setText( receivedDate);
     }
 
@@ -105,6 +109,7 @@ public class AddWeight extends AppCompatActivity {
         Calendar cal = Calendar.getInstance();
         Date todaysdate = cal.getTime();
         Date receivedDate = dateFormat.parse(lblDate.getText().toString());
+        Weight weight = new Weight();
 
         if(txtWeight.length() == 0 ) {
             Toast.makeText(this, R.string.completeFields, Toast.LENGTH_LONG).show();
@@ -132,4 +137,6 @@ public class AddWeight extends AppCompatActivity {
             outState.putString("lblDate", lblDate.getText().toString());
             outState.putString("txtCurrentWeight", txtCurrentWeight.getText().toString());
         }
-    }
+    };
+
+

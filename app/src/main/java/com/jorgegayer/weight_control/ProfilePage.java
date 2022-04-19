@@ -36,6 +36,7 @@ public class ProfilePage extends AppCompatActivity {
             editTextWeight.setText(savedInstanceState.getString("editTextWeight"));
             editTextHeight.setText(savedInstanceState.getString("editTextHeight"));
             editTextGoal.setText(savedInstanceState.getString("editTextGoal"));
+            Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         } else {
             userData= userProfile.get();
             if (userData.name!=null) {
@@ -43,9 +44,10 @@ public class ProfilePage extends AppCompatActivity {
                 editTextWeight.setText(Float.toString(userData.weight));
                 editTextHeight.setText(Float.toString(userData.height));
                 editTextGoal.setText(Float.toString(userData.weightGoal));
+                Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
             }
         }
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
     }
 
     private boolean validateFields() {

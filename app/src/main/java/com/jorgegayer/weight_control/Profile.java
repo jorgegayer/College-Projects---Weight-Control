@@ -57,6 +57,7 @@ public class Profile {
             @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             myData.date =  dateFormat.format(todaysdate);
             myData.weight = userProfile.weight;
+            MainActivity.profile.height = userProfile.height;
             weight.set(myData);
             return true;
         } catch (Exception e) {

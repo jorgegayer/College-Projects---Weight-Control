@@ -14,6 +14,7 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -25,6 +26,7 @@ public class Weight {
         db = MainActivity.db;
     }
     public static String calculatedBMI = "0";
+
     LinkedList<WeightData> getAll() {
         LinkedList<WeightData> localHistory = new LinkedList<>();
         try {
@@ -61,11 +63,24 @@ public class Weight {
                         try {
                             db.execSQL("CREATE TABLE IF NOT EXISTS Weight(weightid INTEGER PRIMARY KEY, weight DOUBLE, date DATETIME, bmi VARCHAR)");
                             String sql;
-                            sql = "INSERT INTO Weight (weight, date, bmi) VALUES (" + myData.weight + ",'" + myData.date + "','" + calculatedBMI + "')";
+                            boolean weightExistedBefore = false;
+                            if (checkWeightPerDate(myData.date)) {
+                                sql = "UPDATE Weight set weight=" + myData.weight + ",  bmi='" + calculatedBMI + "' where date='" + myData.date + "'";
+                                weightExistedBefore = true;
+                            }else
+                            {
+                                sql = "INSERT INTO Weight (weight, date, bmi) VALUES (" + myData.weight + ",'" + myData.date + "','" + calculatedBMI + "')";
+                                weightExistedBefore = false;
+                            }
                             db.execSQL(sql);
                             Profile profile = new Profile();
                             profile.update(myData.weight);
-                            Toast.makeText(MainActivity.context, "New weight saved successfully!", Toast.LENGTH_LONG).show();
+                            if (weightExistedBefore) {
+                                Toast.makeText(MainActivity.context, "You've already entered a weight for this date. Weight updated.", Toast.LENGTH_SHORT).show();
+                            }else
+                            {
+                                Toast.makeText(MainActivity.context, "New weight saved successfully!", Toast.LENGTH_LONG).show();
+                            }
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -92,6 +107,22 @@ public class Weight {
 
     }
 
+    public boolean checkWeightPerDate (String date) {
+        WeightData localWeight = new WeightData();
+        try {
+            @SuppressLint("Recycle") Cursor query = db.rawQuery("SELECT * FROM Weight where date='" + date + "' order by Date desc",null);
+
+            if (query.moveToFirst()) {
+                return true;
+            }else
+            {
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
     public static String round(double value) {
         long factor = (long) Math.pow(10, 2);
         value = value * factor;
