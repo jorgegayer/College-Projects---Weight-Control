@@ -6,9 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <include
-        layout="@layout/activity_weight_history" />
-
     <!--    <Button-->
 <!--        android:id="@+id/button3"-->
 <!--        android:layout_width="wrap_content"-->
@@ -21,6 +18,11 @@
 <!--        app:layout_constraintStart_toStartOf="parent"-->
 <!--        app:layout_constraintTop_toBottomOf="@+id/button" />-->
 
+    <include
+        layout="@layout/activity_weight_history"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
@@ -32,6 +34,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_input_add"
-        tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck" />
+        app:backgroundTint="@color/fab"
+        tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck"
+        android:contentDescription="Add new weight"
+        android:focusable="true" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

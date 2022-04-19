@@ -23,4 +23,8 @@
     <string name="date">Date</string>
     <string name="enter_weight_in_kg">Enter weight in kg</string>
     <string name="save">Save</string>
+    <string name="weight_history_list">Weight History</string>
+    <string name="date_list">Date</string>
+    <string name="weight_list">Weight</string>
+    <string name="bmi_list">BMI</string>
 </resources>

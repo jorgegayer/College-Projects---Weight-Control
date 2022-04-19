@@ -13,6 +13,8 @@
         android:layout_marginTop="80dp"
         android:text="@string/profile_tittle"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@android:color/primary_text_light"
+        android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,6 +27,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="32dp"
         android:text="@string/profile_name"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtViewProfileTittle" />
 
@@ -35,6 +38,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="32dp"
         android:text="@string/profile_weight"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtViewNameLabel" />
 
@@ -45,6 +49,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="32dp"
         android:text="@string/profile_height"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtViewWeightLabel" />
 
@@ -55,6 +60,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="32dp"
         android:text="@string/profile_goal"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtViewHeightLabel" />
 
@@ -105,7 +111,7 @@
         android:id="@+id/editTextGoal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="33dp"
+        android:layout_marginStart="36dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/enter_your_desired_weight"
@@ -119,9 +125,10 @@
         android:id="@+id/btnSaveProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="60dp"
         android:onClick="saveProfile"
         android:text="@string/btn_save_profile"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextGoal"
