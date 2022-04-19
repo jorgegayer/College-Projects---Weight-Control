@@ -10,5 +10,6 @@
     <color name="cyan_200">#80DEEA</color> //New colorPrimary
     <color name="cyan_400">#26C6DA</color>
     <color name="fab">#FF6E40</color>
+    <color name="general_font">#757575</color>
     //New colorPrimaryVariant
 </resources>
