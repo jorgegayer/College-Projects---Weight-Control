@@ -54,6 +54,7 @@ public class Weight {
                 null, response -> {
                     try {
                         calculatedBMI = response.getString ("bmi");
+                        MainActivity.bmi = calculatedBMI;
                         try {
                             db.execSQL("CREATE TABLE IF NOT EXISTS Weight(weightid INTEGER PRIMARY KEY, weight DOUBLE, date DATETIME, bmi VARCHAR)");
                             String sql;
