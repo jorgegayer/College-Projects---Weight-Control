@@ -1,7 +1,6 @@
 package com.jorgegayer.weight_control;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
 public class weightHistory extends AppCompatActivity {

@@ -2,14 +2,12 @@ package com.jorgegayer.weight_control;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import java.util.Objects;
 
 public class ProfilePage extends AppCompatActivity {
@@ -31,15 +29,15 @@ public class ProfilePage extends AppCompatActivity {
         editTextHeight = findViewById(R.id.editTextHeight);
         editTextGoal = findViewById(R.id.editTextGoal);
 
-        if (savedInstanceState != null) {
+        if(savedInstanceState != null) {
             editTextName.setText(savedInstanceState.getString("editTextName"));
             editTextWeight.setText(savedInstanceState.getString("editTextWeight"));
             editTextHeight.setText(savedInstanceState.getString("editTextHeight"));
             editTextGoal.setText(savedInstanceState.getString("editTextGoal"));
             Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         } else {
-            userData= userProfile.get();
-            if (userData.name!=null) {
+            userData = userProfile.get();
+            if(userData.name != null) {
                 editTextName.setText(userData.name);
                 editTextWeight.setText(Float.toString(userData.weight));
                 editTextHeight.setText(Float.toString(userData.height));
@@ -47,7 +45,6 @@ public class ProfilePage extends AppCompatActivity {
                 Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
             }
         }
-
     }
 
     private boolean validateFields() {
@@ -55,16 +52,16 @@ public class ProfilePage extends AppCompatActivity {
             Toast.makeText(this, R.string.completeFields, Toast.LENGTH_LONG).show();
             return false;
         }
-        if ( Float.parseFloat(editTextWeight.getText().toString()) < 20 || Float.parseFloat(editTextWeight.getText().toString()) > 1000) {
+        if( Float.parseFloat(editTextWeight.getText().toString()) < 20 || Float.parseFloat(editTextWeight.getText().toString()) > 1000) {
             Toast.makeText(this, R.string.validateWeight, Toast.LENGTH_LONG).show();
             return false;
         }
 
-        if ( Float.parseFloat(editTextGoal.getText().toString()) < 20 || Float.parseFloat(editTextGoal.getText().toString()) > 1000) {
+        if( Float.parseFloat(editTextGoal.getText().toString()) < 20 || Float.parseFloat(editTextGoal.getText().toString()) > 1000) {
             Toast.makeText(this, R.string.validateGoal, Toast.LENGTH_LONG).show();
             return false;
         }
-        if ( Float.parseFloat(editTextHeight.getText().toString()) < 20 || Float.parseFloat(editTextHeight.getText().toString()) > 300) {
+        if( Float.parseFloat(editTextHeight.getText().toString()) < 20 || Float.parseFloat(editTextHeight.getText().toString()) > 300) {
             Toast.makeText(this, R.string.validateHeight, Toast.LENGTH_LONG).show();
             return false;
         }

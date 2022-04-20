@@ -5,17 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.LinkedList;
-
 
 public class WeightListAdapter extends
             RecyclerView.Adapter<WeightListAdapter.WeightViewHolder>  {
-
-
         private final LinkedList<WeightData> mWeightList;
         private final LayoutInflater mInflater;
 
@@ -29,7 +24,6 @@ public class WeightListAdapter extends
             public TextView weightItemView;
             public TextView dateItemView;
             public TextView bmiItemView;
-
             final WeightListAdapter mAdapter;
 
             public WeightViewHolder(View itemView, WeightListAdapter adapter) {
@@ -60,8 +54,6 @@ public class WeightListAdapter extends
             holder.weightItemView.setText(mWeight);
             holder.dateItemView.setText(mDate);
             holder.bmiItemView.setText(mBmi);
-
-
         }
 
         @Override

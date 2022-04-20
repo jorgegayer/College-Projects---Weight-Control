@@ -1,10 +1,8 @@
 package com.jorgegayer.weight_control;
 
-
 import android.annotation.SuppressLint;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -12,11 +10,9 @@ import java.util.Date;
 
 public class Profile {
     public SQLiteDatabase db;
-
     public Profile() {
         db = MainActivity.db;
     }
-
 
     public ProfileData get() {
         ProfileData userProfile = new ProfileData();
@@ -29,7 +25,7 @@ public class Profile {
             int goalIndex = query.getColumnIndex("goal");
 
             query.moveToFirst();
-            if (query == null) return null;
+            if(query == null) return null;
 
             userProfile.name = query.getString(nameIndex);
             userProfile.weight = Float.parseFloat(query.getString(weightIndex));
@@ -46,7 +42,7 @@ public class Profile {
     public boolean set(ProfileData userProfile) {
         try {
             db.execSQL("CREATE TABLE IF NOT EXISTS Profile(userid INTEGER PRIMARY KEY, name VARCHAR, weight DOUBLE, height DOUBLE, goal DOUBLE)");
-            db.execSQL("delete from Profile");
+            db.execSQL("DELETE from Profile");
             String sql;
             sql = "INSERT INTO Profile (name, weight, height, goal) VALUES ('" + userProfile.name + "'," + userProfile.weight + "," + userProfile.height + "," + userProfile.weightGoal + " )";
             db.execSQL(sql);

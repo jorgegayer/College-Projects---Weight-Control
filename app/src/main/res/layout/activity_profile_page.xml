@@ -141,5 +141,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextGoal"
             tools:ignore="UsingOnClickInXml" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
