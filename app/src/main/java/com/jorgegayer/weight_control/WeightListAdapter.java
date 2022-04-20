@@ -8,7 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.LinkedList;
-
+//adapter created to populate the weight on home screen
 public class WeightListAdapter extends
             RecyclerView.Adapter<WeightListAdapter.WeightViewHolder>  {
         private final LinkedList<WeightData> mWeightList;

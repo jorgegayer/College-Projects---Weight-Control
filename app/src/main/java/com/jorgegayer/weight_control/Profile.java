@@ -14,6 +14,7 @@ public class Profile {
         db = MainActivity.db;
     }
 
+    //get user profile
     public ProfileData get() {
         ProfileData userProfile = new ProfileData();
 
@@ -39,6 +40,7 @@ public class Profile {
         return userProfile;
     }
 
+    //set user profile
     public boolean set(ProfileData userProfile) {
         try {
             db.execSQL("CREATE TABLE IF NOT EXISTS Profile(userid INTEGER PRIMARY KEY, name VARCHAR, weight DOUBLE, height DOUBLE, goal DOUBLE)");
@@ -46,6 +48,7 @@ public class Profile {
             String sql;
             sql = "INSERT INTO Profile (name, weight, height, goal) VALUES ('" + userProfile.name + "'," + userProfile.weight + "," + userProfile.height + "," + userProfile.weightGoal + " )";
             db.execSQL(sql);
+            //Automatically set a weight information once the profile is changed or included
             Weight weight = new Weight();
             WeightData myData = new WeightData();
             Calendar cal = Calendar.getInstance();
@@ -63,6 +66,7 @@ public class Profile {
     }
 
     public void update(double weight) {
+    //functions that update the profile current weight
         try {
             String sql;
             sql = "UPDATE Profile SET weight = " + weight;

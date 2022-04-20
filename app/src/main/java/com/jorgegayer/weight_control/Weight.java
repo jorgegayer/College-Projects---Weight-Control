@@ -15,7 +15,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
-
+//Class that handles the object Weight
 public class Weight {
     public SQLiteDatabase db;
     public Weight() {
@@ -23,6 +23,7 @@ public class Weight {
     }
     public static String calculatedBMI = "0";
 
+    //Function that brings all the weight history ordered by date desc
     LinkedList<WeightData> getAll() {
         LinkedList<WeightData> localHistory = new LinkedList<>();
         try {
@@ -47,8 +48,10 @@ public class Weight {
         return localHistory;
     }
 
+    //Function that sets the weight for the date
     void set(WeightData myData) {
         RequestQueue queue = Volley.newRequestQueue(MainActivity.context);
+        //insert the url to calculate the bmi
         String url = "https://body-mass-index-bmi-calculator.p.rapidapi.com/metric?weight=" + myData.weight + "&height=" + MainActivity.profile.height / 100;
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, url,
                 null, response -> {
@@ -56,18 +59,23 @@ public class Weight {
                         calculatedBMI = response.getString ("bmi");
                         MainActivity.bmi = calculatedBMI;
                         try {
+                            //create weight table id does not exist
                             db.execSQL("CREATE TABLE IF NOT EXISTS Weight(weightid INTEGER PRIMARY KEY, weight DOUBLE, date DATETIME, bmi VARCHAR)");
                             String sql;
                             boolean weightExistedBefore = false;
+                            //check if there was a weight for this date before
                             if(checkWeightPerDate(myData.date)) {
+                                //update the information
                                 sql = "UPDATE Weight SET weight=" + myData.weight + ",  bmi='" + calculatedBMI + "' WHERE date='" + myData.date + "'";
                                 weightExistedBefore = true;
                             } else {
+                                //insert a new weight if not found previous information for the current date
                                 sql = "INSERT INTO Weight (weight, date, bmi) VALUES (" + myData.weight + ",'" + myData.date + "','" + calculatedBMI + "')";
                                 weightExistedBefore = false;
                             }
                             db.execSQL(sql);
                             Profile profile = new Profile();
+                            //update profile with the updated information
                             profile.update(myData.weight);
                             if(weightExistedBefore) {
                                 Toast.makeText(MainActivity.context, "You've already entered a weight for this date. Weight updated.", Toast.LENGTH_SHORT).show();
@@ -85,6 +93,7 @@ public class Weight {
                 }, error -> {
 
                 }) {
+            //insert the parameters needed to run the API
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
@@ -96,6 +105,7 @@ public class Weight {
         queue.add(req);
     }
 
+    //check if there is a weight set for an specific date
     public boolean checkWeightPerDate (String date) {
         WeightData localWeight = new WeightData();
         try {
@@ -112,6 +122,7 @@ public class Weight {
         return false;
     }
 
+    //round a double value with 2 decimal places
     public static String round(double value) {
         long factor = (long) Math.pow(10, 2);
         value = value * factor;

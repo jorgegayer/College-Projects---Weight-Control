@@ -1,5 +1,5 @@
 package com.jorgegayer.weight_control;
-
+//Class that contains the profile structure
 public class ProfileData {
     public String name;
     public float weight;
